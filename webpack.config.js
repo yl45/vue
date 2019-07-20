@@ -20,6 +20,8 @@ module.exports = {
             chunkFilename: "[name].[contenthash].css"
         }),
         new VueLoaderPlugin(),
+       
+
     ],
     module: {
         rules: [

@@ -30,11 +30,21 @@
   </div>
 </template>
 <script>
+import mui from  "./lib/mui/js/mui.js"
+// import "./lib/mui/js/mui/min.js"
+export default {
+  mounted() {
+    mui("header,nav").on("tap", "a", function() {
+      mui.openWindow({ url: this.href });
+    });
+  }
+};
 </script>
 <style lang="css" scoped>
 .box-container {
   padding-top: 40px;
   overflow-x: hidden;
+  padding-bottom: 50px;
 }
 .v-enter {
   opacity: 0;
@@ -46,7 +56,7 @@
   position: absolute;
 }
 .v-enter-active,
-.v-leave-active{
-    transition:all .6s linear;
+.v-leave-active {
+  transition: all 0.6s linear;
 }
 </style>

@@ -7,7 +7,11 @@ import SearchContainer from "./components/tabbar/SearchContainer.vue"
 import Newlist from "./components/news/Newlist.vue"
 import Newsinfo from "./components/news/newsinfo.vue"
 import photoList from "./components/pohotos/photolist.vue"
-
+import photoInfo from "./components/pohotos/photoinfo.vue"
+import goodslist from "./components/goods/goodslist.vue"
+import goodsinfo from "./components/goods/goodsinfo.vue"
+import goodsdesc from "./components/goods/goodsdesc.vue"
+import goodscomment from "./components/goods/goodscomment.vue"
 let router = new VueRouter({
     routes: [
         {path:"/",redirect:"/home "},
@@ -18,6 +22,12 @@ let router = new VueRouter({
        {path:"/home/Newlist",component:Newlist},
        {path:"/home/Newsinfo/:id",component:Newsinfo},
        {path:"/home/photolist",component:photoList},
+       {path:"/home/photoinfo/:id",component:photoInfo},
+       {path:"/home/goodslist",component:goodslist},
+       {path:"/home/goodsinfo/:id",component:goodsinfo,name:"goodsinfo"},
+       {path:"/home/goodsdesc/:id",component:goodsdesc,name:"goodsdesc"},
+       {path:"/home/goodscomment/:id",component:goodscomment,name:"goodscomment"},
+       
     ],
     linkActiveClass:"mui-active",
 })

@@ -17,7 +17,7 @@
     </div>
 </template>
 <script>
-    import {Toast} from "mint-ui"
+   import {getnewlist} from "../../index1"
     export default {
         data(){
             return {
@@ -29,17 +29,20 @@
         },
         methods:{
             getnewlist(){
-                this.$http.get("api/getnewslist").then(res=>{
-                   if(res.data.status==0){
-                       console.log(res.data.message);
+                // this.$http.get("api/getnewslist").then(res=>{
+                //    if(res.data.status==0){
+                //        console.log(res.data.message);
                        
-                       this.newlist=res.data.message
+                //        this.newlist=res.data.message
                       
                        
-                   }else{
-                       Toast("请求数据错误")
-                   }
+                //    }else{
+                //        Toast("请求数据错误")
+                //    }
                     
+                // })
+                getnewlist().then(res=>{
+                     this.newlist=res.message
                 })
             }
         }

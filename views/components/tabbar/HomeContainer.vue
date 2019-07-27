@@ -1,11 +1,7 @@
 <template>
   <div>
     <!-- 轮播图 -->
-    <mt-swipe :auto="4000">
-      <mt-swipe-item v-for="item in data" :key="item.img">
-        <img :src="item.img" alt />
-      </mt-swipe-item>
-    </mt-swipe>
+   <swiper :data="data"></swiper>
     <!-- 九宫格 -->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -21,10 +17,10 @@
         </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-        <a href="#">
+        <router-link to="/home/goodslist">
            <img src="../../img/menu3.png" alt="">
           <div class="mui-media-body">商品购买</div>
-        </a>
+        </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
         <a href="#">
@@ -52,6 +48,8 @@
 </template>
 <script>
 import { Toast } from "mint-ui";
+import {getSwiper} from "../../index1"
+import swiper from "../subcomponent/swiper.vue"
 export default {
   data() {
     return {
@@ -60,17 +58,24 @@ export default {
   },
   methods: {
     getSwiper() {
-      this.$http
-        .get("api/getlunbo")
-        .then(res => {
-          console.log(res.body);
-          if (res.body.status == 0) {
-            this.data = res.body.message;
-          } else {
-            Toast("获取数据错误");
-          }
-        });
-    }
+    //   this.$http
+    //     .get("api/getlunbo")
+    //     .then(res => {
+    //       // console.log(res.body);
+    //       if (res.body.status == 0) {
+    //         this.data = res.body.message;
+    //       } else {
+    //         Toast("获取数据错误");
+    //       }
+    //     });
+    // }
+    getSwiper().then(res=>{
+       this.data = res.message;
+    })
+  },
+  },
+  components:{
+    swiper
   },
   created() {
     this.getSwiper();
@@ -78,13 +83,7 @@ export default {
 };
 </script>
 <style scoped>
-.mint-swipe {
-  height: 130px;
-}
-.mint-swipe img {
-  width: 100%;
-  height: 100%;
-}
+
 .mui-grid-view.mui-grid-9 {
     background-color: #fff;
     border: none;

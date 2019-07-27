@@ -23,6 +23,7 @@
 </template>
 <script>
     import { Toast } from "mint-ui"
+    import {getcomment,add} from "../../index1"
     export default {
         data() {
             return {
@@ -37,14 +38,18 @@
         },
         methods: {
             getcomment() {
-                this.$http.get("api/getcomments/" + this.id + "?pageindex=" + this.pageindex).then(res => {
-                    console.log(res.body);
-                    if (res.body.status === 0) {
-                        this.comment = this.comment.concat(res.body.message)
-                    } else {
-                        Toast("数据请求错误")
-                    }
+                // this.$http.get("api/getcomments/" + this.id + "?pageindex=" + this.pageindex).then(res => {
+                //     // console.log(res.body);
+                //     if (res.body.status === 0) {
+                //         this.comment = this.comment.concat(res.body.message)
+                //     } else {
+                //         Toast("数据请求错误")
+                //     }
+                // })
+                getcomment(this.id,this.pageindex).then(res=>{
+                      this.comment = this.comment.concat(res.message)
                 })
+
             },
             more() {
                 this.pageindex++;
@@ -54,29 +59,38 @@
                 if(this.msg.trim()===""){
                     return Toast("不能为空")
                 }
-                this.$http.post("api/postcomment/"+this.$route.params.id,{content:this.msg})
-                .then(res=>{
-                    console.log(res.body);
+                // this.$http.post("api/postcomment/"+this.$route.params.id,{content:this.msg})
+                // .then(res=>{
+                //     // console.log(res.body);
                     
-                   if(res.body.status===0){
-                       let info={
+                //    if(res.body.status===0){
+                //        let info={
+                //            user_name:"匿名用户",
+                //            add_time:Date.now(),
+                //            content:this.msg
+                //        }
+                //        this.comment.unshift(info)
+                       
+                //        this.msg=""
+                //    }else{
+                //        Toast("请求失败")
+                //    }
+                    
+                // })
+                add(this.id,this.msg).then(res=>{
+                     let info={
                            user_name:"匿名用户",
                            add_time:Date.now(),
                            content:this.msg
                        }
                        this.comment.unshift(info)
-                       
                        this.msg=""
-                   }else{
-                       Toast("请求失败")
-                   }
-                    
                 })
             }
         }
     }
 </script>
-<style>
+<style scoped>
     .cmt-title {
         background-color: #ccc;
         line-height: 30px;
